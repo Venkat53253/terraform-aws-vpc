@@ -1,11 +1,19 @@
-output "public_ip" {
-  value       = aws_instance.this.public_ip
+output "vpc_id" {
+  value       = aws_vpc.main.id
 }
 
-output "private_ip" {
-  value       = aws_instance.this.private_ip
+variable "sg_ids" {}
+variable "tags" {}
+
+
+output "public_subnet_ids" {
+  value = aws_subnet.public[*].id
 }
 
-output "instance_id" {
-  value       = aws_instance.this.id
+output "private_subnet_ids" {
+  value = aws_subnet.private[*].id
+}
+
+output "database_subnet_ids" {
+  value = aws_subnet.database[*].id
 }

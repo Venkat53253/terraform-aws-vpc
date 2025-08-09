@@ -1,25 +1,33 @@
-variable "ami_id" {
-    type = string
-    default = "ami-09c813fb71547fc4f"
-    description = "AMI ID of the EC2 instance"
+variable "project" {
+  type = string
 }
 
-variable "instance_type" {
-    default = "t3.micro"
-    type = string
-    description = "Instance size"
-
-    validation {
-        condition     = contains(["t3.micro", "t3.small", "t3.medium"], var.instance_type)
-        error_message = "Valid values for instance_type are: t3.micro, t3.small, t3.medium"
-    } 
+variable "environment" {
+  type = string
 }
 
-# mandatory to provide
+variable "public_subnet_cidrs" {
+  type = list(string)
+}
+
+variable "private_subnet_cidrs" {
+  type = list(string)
+}
+
+variable "database_subnet_cidrs" {
+  type = list(string)
+}
+
+variable "is_peering_required" {
+  type    = bool
+  default = false
+}
+
 variable "sg_ids" {
-    type = list
+  type = list(string)
 }
 
 variable "tags" {
-    type = map
+  type    = map(string)
+  default = {}
 }
